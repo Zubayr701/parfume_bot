@@ -30,7 +30,7 @@ public class MyBotService {
         List<InlineKeyboardButton> row1 = new ArrayList<>();
 
         InlineKeyboardButton btn1 = new InlineKeyboardButton();
-        btn1.setText("📋 Menu");
+        btn1.setText(" Menu");
         btn1.setCallbackData("menuu");
         row1.add(btn1);
         rowlist.add(row1);
@@ -189,7 +189,7 @@ public class MyBotService {
     public static SendMessage showUnisexPerfume(Long chatId){
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("⚡ *Uniseks atirlar*\n\n" +
+        message.setText("Unisex atirlar*\n\n" +
                 "• Calvin Klein CK One - 350,000 so'm\n" +
                 "• Tom Ford Noir - 550,000 so'm\n" +
                 "• Byredo - 580,000 so'm\n" +
@@ -359,6 +359,8 @@ public class MyBotService {
 
         return message;
     }
+
+
 
     public static SendMessage showOrders(Long chatId){
         SendMessage message = new SendMessage();

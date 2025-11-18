@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class MyBot extends TelegramLongPollingBot {
 
-    // Har bir foydalanuvchi uchun oxirgi sahifani saqlash
     private Map<Long, String> userLastPage = new HashMap<>();
 
     @Override
@@ -19,16 +18,13 @@ public class MyBot extends TelegramLongPollingBot {
             Long chatId = update.getMessage().getChatId();
 
             try {
-                // /start buyrug'i
                 if (message.equals("/start")){
                     execute(MyBotService.strt(chatId));
                 }
-                // Menu (inline button dan)
                 else if (message.equals("menuu")){
                     execute(MyBotService.showMenu(chatId));
                     userLastPage.put(chatId, "menu");
                 }
-                // Asosiy menu tugmalari
                 else if (message.equals("🎁 Mahsulotlar")){
                     execute(MyBotService.showProducts(chatId));
                     userLastPage.put(chatId, "menu");
@@ -61,7 +57,6 @@ public class MyBot extends TelegramLongPollingBot {
                     execute(MyBotService.showInfo(chatId));
                     userLastPage.put(chatId, "menu");
                 }
-                // Kategoriyalar ichidagi tugmalar
                 else if (message.equals("👔 Erkaklar uchun")){
                     execute(MyBotService.showMenPerfume(chatId));
                     userLastPage.put(chatId, "categories");
@@ -78,7 +73,6 @@ public class MyBot extends TelegramLongPollingBot {
                     execute(MyBotService.showPremiumPerfume(chatId));
                     userLastPage.put(chatId, "categories");
                 }
-                // Orqaga tugmasi - qayerdan kelganiga qarab qaytaradi
                 else if (message.equals("⬅️ Orqaga")){
                     String lastPage = userLastPage.getOrDefault(chatId, "menu");
 
@@ -96,7 +90,6 @@ public class MyBot extends TelegramLongPollingBot {
             }
         }
 
-        // Inline button (Menu tugmasi /start dan keyin)
         if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
             Long chatId = update.getCallbackQuery().getMessage().getChatId();
@@ -107,7 +100,6 @@ public class MyBot extends TelegramLongPollingBot {
                     userLastPage.put(chatId, "menu");
                 }
 
-                // Callback javobini yuborish
                 org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery answer =
                         new org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery();
                 answer.setCallbackQueryId(update.getCallbackQuery().getId());
